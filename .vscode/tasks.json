@@ -1,0 +1,28 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "verify: whole repo",
+      "type": "shell",
+      "command": "python scripts/verify.py",
+      "problemMatcher": [],
+      "group": "test"
+    },
+    {
+      "label": "backend: lint + tests",
+      "type": "shell",
+      "command": "ruff check . && pytest -q",
+      "options": { "cwd": "${workspaceFolder}/backend" },
+      "problemMatcher": [],
+      "group": "test"
+    },
+    {
+      "label": "frontend: lint + tests + build",
+      "type": "shell",
+      "command": "npm run lint && npm test -- --run && npm run build",
+      "options": { "cwd": "${workspaceFolder}/frontend" },
+      "problemMatcher": [],
+      "group": "test"
+    }
+  ]
+}

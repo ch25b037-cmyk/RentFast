@@ -1,0 +1,7 @@
+import { Bell, Check } from "lucide-react";
+import { formatDistanceToNow } from "date-fns";
+import { Card } from "../components/ui/Card";
+import { EmptyState, Skeleton } from "../components/ui/Skeleton";
+import { useNotifications, useReadNotification } from "../hooks/useNotifications";
+
+export default function Notifications() { const query = useNotifications(); const read = useReadNotification(); return <div className="notifications-page"><div className="page-heading"><div><p className="eyebrow">Keep the thread</p><h1>Notifications</h1><p className="lede">Offers, meetups and return reminders in one place.</p></div></div>{query.isLoading && <Skeleton className="notification-skeleton" />}{query.isError && <Card className="error-card"><h2>Notifications are offline.</h2><button className="text-button" onClick={() => query.refetch()}>Retry</button></Card>}{query.isSuccess && query.data.items.length === 0 && <EmptyState title="All caught up." copy="New offers and loan reminders will appear here." />}{query.isSuccess && <div className="notification-list">{query.data.items.map((item) => <Card key={item.id} className={item.read_at ? "notification read" : "notification"}><span className="notification-icon"><Bell size={16} /></span><div><h2>{item.title}</h2><p>{item.body}</p><time>{formatDistanceToNow(new Date(item.created_at), { addSuffix: true })}</time></div>{!item.read_at && <button className="icon-button" onClick={() => read.mutate(item.id)} aria-label={`Mark ${item.title} as read`}><Check size={16} /></button>}</Card>)}</div>}</div>; }

@@ -1,0 +1,31 @@
+:root {
+  --bg: #F7F4EE;
+  --surface: #FFFFFF;
+  --surface-2: #EFEBE2;
+  --line: #E2DDD1;
+  --ink: #15181C;
+  --ink-muted: #5B6168;
+  --signal: #FF6A2B;
+  --on-signal: #15181C;
+  --trust: #0B7A6B;
+  --on-trust: #FFFFFF;
+  --danger: #C62828;
+  --warning: #B26A00;
+  --success: #1F7A3D;
+}
+
+[data-theme="dark"] {
+  --bg: #0F1114;
+  --surface: #171A1F;
+  --surface-2: #1F232A;
+  --line: #2A2F37;
+  --ink: #F2EFE8;
+  --ink-muted: #A2A8B0;
+  --signal: #FF7A3D;
+  --on-signal: #15181C;
+  --trust: #2BC4AE;
+  --on-trust: #0F1114;
+  --danger: #FF6B6B;
+  --warning: #F2A93B;
+  --success: #4CC375;
+}

@@ -1,0 +1,6 @@
+import { Moon, ShieldCheck, Sun } from "lucide-react";
+import { Card } from "../components/ui/Card";
+import { TrustBadge } from "../components/ui/Badge";
+import { useCurrentUser } from "../hooks/useAuth";
+
+export default function Profile() { const { data: user } = useCurrentUser(); const dark = document.documentElement.dataset.theme === "dark"; const toggle = () => { document.documentElement.dataset.theme = dark ? "" : "dark"; }; return <div className="profile-page"><div className="page-heading"><div><p className="eyebrow">Your campus identity</p><h1>Profile</h1><p className="lede">A little context helps people lend with confidence.</p></div><button className="icon-button" onClick={toggle} aria-label="Toggle theme">{dark ? <Sun size={19} /> : <Moon size={19} />}</button></div><Card className="profile-card"><div className="profile-avatar">{user?.display_name?.slice(0, 2).toUpperCase()}</div><div><h2>{user?.display_name}</h2><p>{user?.email}</p><TrustBadge tier={user?.trust_tier} /></div></Card><Card><div className="section-heading"><h2>Trust score</h2><ShieldCheck color="var(--trust)" size={20} /></div><div className="trust-score"><strong>{user?.trust_score}</strong><span>out of 100</span></div><p className="muted-copy">Your score grows through on-time returns, thoughtful reviews and clear communication.</p></Card></div>; }

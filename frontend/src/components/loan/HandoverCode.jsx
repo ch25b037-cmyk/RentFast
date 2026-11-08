@@ -1,0 +1,5 @@
+import { useEffect, useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
+import { Button } from "../ui/Button";
+
+export default function HandoverCode({ code, receiverName = "your lender" }) { const [revealed, setRevealed] = useState(false); useEffect(() => { const hide = () => setRevealed(false); document.addEventListener("visibilitychange", hide); return () => document.removeEventListener("visibilitychange", hide); }, []); return <div className="code-panel"><p className="eyebrow">Handover code</p><h2>Show this to {receiverName}</h2><p className="code-caption">Only show it when you are together at the meetup spot.</p><div className={`code-digits ${revealed ? "is-revealed" : ""}`} aria-label={revealed ? "Your six digit handover code" : "Hidden handover code"}>{(code ?? "••••••").split("").map((digit, index) => <span key={`${digit}-${index}`}>{revealed ? digit : "•"}</span>)}</div><Button variant="secondary" onClick={() => setRevealed((current) => !current)}>{revealed ? <EyeOff size={16} /> : <Eye size={16} />}{revealed ? "Hide my code" : "Reveal my code"}</Button></div>; }
